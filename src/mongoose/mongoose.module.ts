@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule as NestMongooseModule } from '@nestjs/mongoose';
 import { MONGOOSE_CONNECTION_STRING } from 'src/config/constants';
-import { SeedsService } from './seeds/seeds.service';
+import { SeedsModule } from './seeds/seeds.module';
 
 @Module({
   imports: [
@@ -9,8 +9,7 @@ import { SeedsService } from './seeds/seeds.service';
       useCreateIndex: true,
       useFindAndModify: false,
     }),
+    SeedsModule,
   ],
-  providers: [SeedsService],
-  exports: [SeedsService],
 })
 export class MongooseModule {}

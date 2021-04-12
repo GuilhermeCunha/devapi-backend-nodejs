@@ -2,11 +2,13 @@
 
 
 ## Features
-  - [x] Autenticação utilizando JWT
+  - [x] Autenticação utilizando JWT no formato Bearer
   - [x] Autorização através de "roles"
+  - [x] Criação do BD utilizando MongoDB através do Mongoose
   - [x] Validação
   - [] Paginação
   - [] Filtragem
+  - [] Popular o banco com Seeds
 ## 1) Instalando dependencias
 
 ```bash
