@@ -2,27 +2,31 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsInt, IsOptional } from 'class-validator';
 import { Transform } from 'class-transformer';
 
+export const DEFAULT_LIMIT = 10;
+export const DEFAULT_SKIP = 0;
+
 export class PaginationDTO {
   @ApiProperty({
     required: false,
-    default: 0,
-  })
-  @Transform(({ value }) => {
-    if (value != null) return Number(value);
-    return 10;
+    default: DEFAULT_SKIP,
   })
   @IsOptional()
   @IsInt()
-  skip: number;
+  @Transform(({ value }) => {
+    if (value != null) return Number(value);
+    return DEFAULT_SKIP;
+  })
+  skip = DEFAULT_SKIP;
 
   @ApiProperty({
     required: false,
-    default: 10,
-  })
-  @Transform(({ value }) => {
-    if (value != null) return Number(value);
-    return 10;
+    default: DEFAULT_LIMIT,
   })
   @IsOptional()
-  limit: number;
+  @IsInt()
+  @Transform(({ value }) => {
+    if (value != null) return Number(value);
+    return DEFAULT_LIMIT;
+  })
+  limit = DEFAULT_LIMIT;
 }

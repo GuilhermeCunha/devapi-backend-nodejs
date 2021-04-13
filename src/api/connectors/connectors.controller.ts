@@ -24,7 +24,8 @@ export class ConnectorsController {
   @Get('/')
   async getMany(
     @Query() filters: FilterConnectorsDTO = {},
-    @Query() pagination: PaginationDTO,
+    @Query()
+    pagination: PaginationDTO,
   ): Promise<PaginatedResponse<Connector>> {
     const connectors = await this.connectorsService.getMany({
       filters: {

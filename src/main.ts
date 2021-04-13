@@ -22,7 +22,10 @@ async function bootstrap() {
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
-      whitelist: true,
+      // whitelist: true,
+      // transformOptions: {
+      //   exposeUnsetFields: false,
+      // } as any,
     }),
   );
   await app.listen(APP_PORT).then(() => {

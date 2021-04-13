@@ -32,6 +32,7 @@ export class ConnectorsService {
     filters,
   }: IGetManyConnectors): Promise<PaginatedResponse<Connector> | Connector[]> {
     let query = this.connectorsModel.find(filters);
+    console.log({ pagination });
     if (pagination) {
       const total = await this.connectorsModel.countDocuments(filters);
       query = query.skip(pagination.skip).limit(pagination.limit);
