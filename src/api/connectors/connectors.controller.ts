@@ -1,6 +1,7 @@
 import { Body, Get, Param, Patch, Post, Put, Query } from '@nestjs/common';
 import { Controller } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ROLES } from 'src/config/constants';
 import { Connector } from 'src/mongoose/schemas/Connector.schema';
 import { toMongooseId } from 'src/mongoose/utils';
 import { JwtAuth } from 'src/shared/auth/jwt/decorators/jwt-auth.decorator';
@@ -21,6 +22,7 @@ export class ConnectorsController {
     description: 'Conectores obtidos com sucesso',
     type: ListConnectors,
   })
+  @JwtAuth([])
   @Get('/')
   async getMany(
     @Query() filters: FilterConnectorsDTO = {},
@@ -38,20 +40,11 @@ export class ConnectorsController {
     return connectors as PaginatedResponse<Connector>;
   }
 
-  @ApiCreatedResponse({
-    description: 'Conector cadastrada com sucesso.',
-    type: Connector,
-  })
-  @Post('/')
-  @JwtAuth([])
-  async store(@Body() dto: CreateConnectorDTO): Promise<Connector> {
-    return await this.connectorsService.create(dto);
-  }
-
   @ApiOkResponse({
     description: 'Conector obtido com sucesso.',
     type: Connector,
   })
+  @JwtAuth([])
   @Get(':id')
   async getOne(@Param('id') id: string): Promise<Connector> {
     return await this.connectorsService.getOne({
@@ -62,11 +55,21 @@ export class ConnectorsController {
     });
   }
 
+  @ApiCreatedResponse({
+    description: 'Conector cadastrada com sucesso.',
+    type: Connector,
+  })
+  @Post('/')
+  @JwtAuth([ROLES.ADMIN])
+  async store(@Body() dto: CreateConnectorDTO): Promise<Connector> {
+    return await this.connectorsService.create(dto);
+  }
+
   @ApiOkResponse({
     description: 'Conector atualizado com sucesso.',
   })
   @Put(':id')
-  @JwtAuth([])
+  @JwtAuth([ROLES.ADMIN])
   async update(
     @Param('id') id: string,
     @Body() dto: UpdateConnectorDTO,
@@ -83,7 +86,7 @@ export class ConnectorsController {
     description: 'Conector atualizado com sucesso.',
   })
   @Patch(':id')
-  @JwtAuth([])
+  @JwtAuth([ROLES.ADMIN])
   async partialUpdate(
     @Param('id') id: string,
     @Body() dto: PatchConnectorDTO,
