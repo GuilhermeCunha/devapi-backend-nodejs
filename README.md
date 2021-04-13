@@ -6,8 +6,8 @@
   - [x] Autorização através de "roles"
   - [x] Criação do BD utilizando MongoDB através do Mongoose
   - [x] Validação
-  - [] Paginação
-  - [] Filtragem
+  - [x] Paginação
+  - [x] Filtragem
   - [] Popular o banco com Seeds
 ## 1) Instalando dependencias
 
