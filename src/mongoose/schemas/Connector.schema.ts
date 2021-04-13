@@ -4,10 +4,13 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export const connectorTypes = ['REST', 'BD', 'SOAP'] as const;
 export const connectorPrivacities = ['PUBLIC', 'PRIVATE'] as const;
+export const connectorStatus = ['ACTIVE', 'INACTIVE'] as const;
 
 @Schema()
 export class Connector {
-  @ApiProperty()
+  @ApiProperty({
+    type: String,
+  })
   _id?: Types.ObjectId;
 
   @ApiProperty()
@@ -30,6 +33,14 @@ export class Connector {
   })
   privacy: typeof connectorPrivacities[number];
 
+  @ApiProperty({
+    enum: connectorStatus,
+  })
+  @Prop({
+    type: String,
+  })
+  status: typeof connectorStatus[number];
+
   @ApiProperty()
   @Prop()
   baseUrl: string;
@@ -46,9 +57,11 @@ export class Connector {
   @Prop()
   description: string;
 
-  @ApiProperty()
-  @Prop()
-  status: string; //TODO Verificar o que exatamente é este status
+  @Prop({
+    required: false,
+    default: false,
+  })
+  isDeleted?: boolean;
 
   @ApiProperty()
   @Prop({

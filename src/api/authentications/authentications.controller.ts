@@ -49,9 +49,10 @@ export class AuthenticationsController {
     description: 'Usuário obtido com sucesso.',
     type: User,
   })
-  @JwtAuth([ROLES.USER])
+  @JwtAuth([])
   @Get('/me')
   async me(@JwtUser() user: TokenInfo): Promise<TokenInfo> {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { iat, exp, ...tokenInfo } = user;
     return tokenInfo;
   }

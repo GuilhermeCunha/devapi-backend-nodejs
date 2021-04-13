@@ -7,6 +7,7 @@ import { APP_PORT } from './config/constants';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix('v1');
 
   const swaggerOptions = new DocumentBuilder()
     .setTitle('DevApi Api')
