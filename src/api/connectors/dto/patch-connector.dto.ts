@@ -1,4 +1,4 @@
-import { IsIn, IsOptional, IsString } from 'class-validator';
+import { IsIn, IsOptional, IsString, IsUrl } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import {
   connectorPrivacities,
@@ -42,14 +42,14 @@ export class PatchConnectorDTO {
     required: false,
   })
   @IsOptional()
-  @IsString()
+  @IsUrl()
   baseUrl?: string;
 
   @ApiProperty({
     required: false,
   })
   @IsOptional()
-  @IsString()
+  @IsUrl()
   logoUrl?: string;
 
   @ApiProperty({
