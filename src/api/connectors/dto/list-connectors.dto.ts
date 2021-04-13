@@ -3,6 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   Connector,
   connectorPrivacities,
+  connectorStatus,
   connectorTypes,
 } from 'src/mongoose/schemas/Connector.schema';
 import { PaginatedResponse } from 'src/shared/pagination/dto/pagination-response.dto';
@@ -39,6 +40,14 @@ export class FilterConnectorsDTO {
 
   @ApiProperty({
     required: false,
+    enum: connectorStatus,
+  })
+  @IsOptional()
+  @IsIn(connectorStatus)
+  status?: typeof connectorStatus[number];
+
+  @ApiProperty({
+    required: false,
   })
   @IsOptional()
   @IsString()
@@ -64,11 +73,4 @@ export class FilterConnectorsDTO {
   @IsOptional()
   @IsString()
   description?: string;
-
-  @ApiProperty({
-    required: false,
-  })
-  @IsOptional()
-  @IsString()
-  status?: string; // TODO Validar o que exatamente é o status
 }

@@ -2,6 +2,7 @@ import { IsIn, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import {
   connectorPrivacities,
+  connectorStatus,
   connectorTypes,
 } from 'src/mongoose/schemas/Connector.schema';
 
@@ -28,6 +29,13 @@ export class CreateConnectorDTO {
 
   @ApiProperty({
     required: true,
+    enum: connectorStatus,
+  })
+  @IsIn(connectorStatus)
+  status: typeof connectorStatus[number];
+
+  @ApiProperty({
+    required: true,
   })
   @IsString()
   baseUrl: string;
@@ -49,10 +57,4 @@ export class CreateConnectorDTO {
   })
   @IsString()
   description: string;
-
-  @ApiProperty({
-    required: true,
-  })
-  @IsString()
-  status: string; // TODO Validar o que exatamente é o status
 }

@@ -7,11 +7,13 @@ import { APP_PORT } from './config/constants';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix('v1');
 
   const swaggerOptions = new DocumentBuilder()
     .setTitle('DevApi Api')
     .setDescription('DevApi Api')
     .setVersion('0.0.1')
+    .setBasePath('v1')
     .addBearerAuth()
     .build();
 
@@ -22,10 +24,7 @@ async function bootstrap() {
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
-      // whitelist: true,
-      // transformOptions: {
-      //   exposeUnsetFields: false,
-      // } as any,
+      whitelist: true,
     }),
   );
   await app.listen(APP_PORT).then(() => {

@@ -27,12 +27,10 @@ export class ConnectorsService {
     @InjectModel(Connector.name)
     private connectorsModel: Model<ConnectorDocument>,
   ) {}
-  async getMany({
-    pagination,
-    filters,
-  }: IGetManyConnectors): Promise<PaginatedResponse<Connector> | Connector[]> {
+  async getMany({ pagination, filters }: IGetManyConnectors = {}): Promise<
+    PaginatedResponse<Connector> | Connector[]
+  > {
     let query = this.connectorsModel.find(filters);
-    console.log({ pagination });
     if (pagination) {
       const total = await this.connectorsModel.countDocuments(filters);
       query = query.skip(pagination.skip).limit(pagination.limit);
@@ -59,7 +57,11 @@ export class ConnectorsService {
     return connector;
   }
 
-  async create(data: Connector): Promise<Connector> {
+  async create(data: Connector): Promise<ConnectorDocument> {
+    return this.connectorsModel.create(data);
+  }
+
+  async createMany(data: Connector[]): Promise<ConnectorDocument[]> {
     return this.connectorsModel.create(data);
   }
 

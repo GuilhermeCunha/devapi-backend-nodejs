@@ -2,6 +2,7 @@ import { IsIn, IsOptional, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import {
   connectorPrivacities,
+  connectorStatus,
   connectorTypes,
 } from 'src/mongoose/schemas/Connector.schema';
 
@@ -31,6 +32,14 @@ export class PatchConnectorDTO {
 
   @ApiProperty({
     required: false,
+    enum: connectorStatus,
+  })
+  @IsOptional()
+  @IsIn(connectorStatus)
+  status?: typeof connectorStatus[number];
+
+  @ApiProperty({
+    required: false,
   })
   @IsOptional()
   @IsString()
@@ -56,11 +65,4 @@ export class PatchConnectorDTO {
   @IsOptional()
   @IsString()
   description?: string;
-
-  @ApiProperty({
-    required: false,
-  })
-  @IsOptional()
-  @IsString()
-  status?: string; // TODO Validar o que exatamente é o status
 }
