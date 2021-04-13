@@ -8,7 +8,7 @@
   - [x] Validação
   - [x] Paginação
   - [x] Filtragem
-  - [] Popular o banco com Seeds
+  - [x] Popular o banco com Seeds
 ## 1) Instalando dependencias
 
 ```bash
