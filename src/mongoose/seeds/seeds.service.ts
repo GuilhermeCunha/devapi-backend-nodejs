@@ -18,15 +18,22 @@ export class SeedsService {
 
     if (connectors.length < 1) {
       // TODO Implementar seeds
-      // await this.connectorsService.createMany([{
-      //   baseUrl: 'http://localhost:3333',
-      //   category: 'categoria',
-      //   description: 'Um descrição',
-      //   logoUrl: 'um',
-      //   name: 'Facebook',
-      //   privacy: 'PRIVATE',
-      //   status: ''
-      // }]);
+      await this.connectorsService.createMany(
+        ['facebook', 'google', 'instagram', 'orkut'].map(
+          (companyName, index) => {
+            return {
+              baseUrl: `http://google.com/${companyName}`,
+              category: `categoria ${index + 1}`,
+              description: `Api da ${companyName}`,
+              logoUrl: `http://google.com/${companyName}/icon.png`,
+              name: companyName,
+              privacy: 'PRIVATE',
+              status: index < 2 ? 'ACTIVE' : 'INACTIVE',
+              type: index < 2 ? 'REST' : 'SOAP',
+            };
+          },
+        ),
+      );
     }
   }
 }
