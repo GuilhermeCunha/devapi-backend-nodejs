@@ -13,7 +13,6 @@ async function bootstrap() {
     .setTitle('DevApi Api')
     .setDescription('DevApi Api')
     .setVersion('0.0.1')
-    .setBasePath('v1')
     .addBearerAuth()
     .build();
 
