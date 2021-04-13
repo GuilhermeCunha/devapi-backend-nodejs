@@ -19,20 +19,26 @@ export class SeedsService {
     if (connectors.length < 1) {
       // TODO Implementar seeds
       await this.connectorsService.createMany(
-        ['facebook', 'google', 'instagram', 'orkut'].map(
-          (companyName, index) => {
-            return {
-              baseUrl: `http://google.com/${companyName}`,
-              category: `categoria ${index + 1}`,
-              description: `Api da ${companyName}`,
-              logoUrl: `http://google.com/${companyName}/icon.png`,
-              name: companyName,
-              privacy: 'PRIVATE',
-              status: index < 2 ? 'ACTIVE' : 'INACTIVE',
-              type: index < 2 ? 'REST' : 'SOAP',
-            };
-          },
-        ),
+        [
+          'facebook',
+          'google',
+          'instagram',
+          'orkut',
+          'ibm',
+          'amazon',
+          'mercado-livre',
+        ].map((companyName, index) => {
+          return {
+            baseUrl: `http://google.com/${companyName}`,
+            category: `categoria ${index + 1}`,
+            description: `Api da ${companyName}`,
+            logoUrl: `http://google.com/${companyName}/icon.png`,
+            name: companyName,
+            privacy: 'PRIVATE',
+            status: index < 2 ? 'ACTIVE' : 'INACTIVE',
+            type: index < 2 ? 'REST' : 'SOAP',
+          };
+        }),
       );
     }
   }
