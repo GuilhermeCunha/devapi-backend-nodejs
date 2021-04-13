@@ -17,7 +17,6 @@ export class SeedsService {
     const connectors = (await this.connectorsService.getMany()) as Connector[];
 
     if (connectors.length < 1) {
-      // TODO Implementar seeds
       await this.connectorsService.createMany(
         [
           'facebook',
