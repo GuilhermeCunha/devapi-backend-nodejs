@@ -18,6 +18,12 @@ $ yarn install
 ## 2) Configurando enviroment
 Basta duplicar o arquivo ".env.example", renomeá-lo para ".env" e preencher com valores válidos.
 
+
+## 3) (opcional) Populando o banco com dados de teste
+
+```bash
+$ yarn run seeds
+```
 ## 3) Rodando a aplicação
 
 ```bash

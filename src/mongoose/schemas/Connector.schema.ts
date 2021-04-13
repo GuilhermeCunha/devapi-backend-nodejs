@@ -7,7 +7,9 @@ export const connectorPrivacities = ['PUBLIC', 'PRIVATE'] as const;
 
 @Schema()
 export class Connector {
-  @ApiProperty()
+  @ApiProperty({
+    type: String,
+  })
   _id?: Types.ObjectId;
 
   @ApiProperty()
@@ -49,6 +51,12 @@ export class Connector {
   @ApiProperty()
   @Prop()
   status: string; //TODO Verificar o que exatamente é este status
+
+  @Prop({
+    required: false,
+    default: false,
+  })
+  isDeleted?: boolean;
 
   @ApiProperty()
   @Prop({
